@@ -1,10 +1,8 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
-var utils = require('../helpers/utils');
-var getDate = utils.getDate;
-var DayItem = require('./DayItem');
+import React, { PropTypes } from 'react'
+import { getDate } from '../helpers/utils'
+import DayItem from './DayItem'
 
-var styles = {
+const styles = {
   container: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -29,15 +27,13 @@ var styles = {
   }
 }
 
-function ForecastUI (props) {
+function ForecastUI ({city, forecast, handleClick}) {
   return (
     <div style={{textAlign: 'center'}}>
-      <h1 style={styles.header}>{props.city}</h1>
+      <h1 style={styles.header}>{city}</h1>
       <p style={styles.subheader}>Select a day</p>
       <div style={styles.container}>
-        {props.forecast.list.map(function (listItem) {
-          return <DayItem key={listItem.dt} day={listItem} handleClick={props.handleClick.bind(null, listItem)} />
-        })}
+        {forecast.list.map((listItem) => <DayItem key={listItem.dt} day={listItem} handleClick={handleClick.bind(null, listItem)} />)}
       </div>
     </div>
   )
@@ -65,4 +61,4 @@ Forecast.propTypes = {
   isLoading: PropTypes.bool.isRequired
 }
 
-module.exports = Forecast;
+export default Forecast
